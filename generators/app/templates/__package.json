@@ -1,7 +1,7 @@
 {
   "name": "<%- service.name %>",
   "version": "0.0.1",
-  "description": "Microservice for store management",
+  "description": "<%- service.description %>",
   "scripts": {
   <% if(useDocker){ -%>
     "build": "cross-var docker build . -t $npm_package_config_imageName:$npm_package_version -t $npm_package_config_imageName:latest",
@@ -18,7 +18,8 @@
     "name": "<%- author.fullName %>"
   },
   "keywords": [
-    "rest,microservice"
+    "rest",
+    "hapi"
   ],
   "private": true,
   <% if(useDocker){ -%>

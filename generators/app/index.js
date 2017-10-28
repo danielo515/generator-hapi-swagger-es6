@@ -86,7 +86,6 @@ module.exports = class extends BaseGenerator {
     this._copyFile('test');
     this._copyFile('config');
     // Root files
-    this._copyFile('Dockerfile');
     this._copyFile('.gitignore');
     this._copyFile('.eslintignore');
     this._copyFile('.eslintrc');
