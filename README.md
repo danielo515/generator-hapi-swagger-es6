@@ -16,6 +16,21 @@ Then generate your new project:
 yo hapi-swagger-es-6
 ```
 
+## Generator Features
+
+This generator creates a hapi backend with the following features:
+
+* Lab for testing
+* Swagger for automatic endpoint documentation
+* Console output by Good (good-squeeze and good-console)
+* Two example endpoints (version and healtcheck)
+* Testing examples including the main server and the two endpoints
+* A Dockerfile and a docker-compose files for deploying as a microservice (optional)
+* npm scripts for starting the server, starting on dev-mode with hot reloading (thanks to nodemon)
+
+The generated code expects a node version `>=6` because it makes a heavy use of destructuring.
+We target cleaniness, simple folder structure and folowing hapi guidelines.
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
