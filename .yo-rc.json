@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Danielo Rodriguez Rivero",
+      "authorEmail": "rdanielo@gmail.com",
+      "authorUrl": "https://danielorodriguez.com"
+    }
+  }
+}
