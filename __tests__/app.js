@@ -3,7 +3,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-hapi-swagger-es-6:app', () => {
+describe('generator-hapi-swagger-es6:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
@@ -11,6 +11,6 @@ describe('generator-hapi-swagger-es-6:app', () => {
   });
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
+    assert.file(['Dockerfile']);
   });
 });
