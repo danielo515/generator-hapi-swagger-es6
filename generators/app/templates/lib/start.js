@@ -12,7 +12,7 @@ const internals = {};
 internals.manifest = {
     connections: [
         {
-            port: process.env.PORT || Config.server.port || 3000
+            port: process.env.PORT || Config.server.port || <%- service.port %>
         }
     ],
     registrations: [
@@ -75,7 +75,4 @@ Server.init(internals.manifest, internals.composeOptions, (err, server) => {
 
     Hoek.assert(!err, err);
     server.log(process.env.npm_package_name + ' v' + process.env.npm_package_version + ' started at: ' + server.info.uri);
-    // Wake up the daemons that . In this same microservice ATM
-    require('./estimateWait'); // Estimates the wait time
-    require('./queueCounter'); // Counts the users on a shops and assigns turns
 });

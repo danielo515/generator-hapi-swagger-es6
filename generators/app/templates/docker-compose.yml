@@ -2,7 +2,7 @@ version: '3'
 
 services:
     irh-microservice:
-        container_name: ironhack-microservice
-        image: irh-microservice:latest
+        container_name: <%- service.name %>
+        image: <%- service.name %>:latest
         ports:
-            - "3000:3000"
+            - "<%- service.port %>:<%- service.port %>"

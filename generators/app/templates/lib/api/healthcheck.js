@@ -5,7 +5,7 @@ exports.register = function (server, options, next) {
     server.route({
         path: '/ops/healthcheck',
         method: 'GET',
-        handler: function (request, reply) {
+        handler(request, reply) {
 
             reply({ message: 'ok' });
         }
