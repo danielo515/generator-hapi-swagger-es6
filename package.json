@@ -1,6 +1,6 @@
 {
   "name": "generator-hapi-swagger-es6",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description":
     "A modern hapi REST service with automatic documentation using swagger with optional docker support",
   "homepage": "https://github.com/danielo515/generator-hapi-swagger-es6",
