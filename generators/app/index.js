@@ -1,4 +1,3 @@
-'use strict';
 const BaseGenerator = require('../../utils/BaseGenerator');
 const chalk = require('chalk');
 const yosay = require('yosay');
@@ -16,50 +15,58 @@ module.exports = class extends BaseGenerator {
         type: `input`,
         name: 'service.name',
         message: `Server Name`,
-        default: this._hyphenate(this.appname)
+        default: this._hyphenate(this.appname),
+        store: true
       },
       {
         type: `input`,
         name: 'service.description',
         message: `Description (what does this server do)`,
-        default: 'A modern hapijs backend'
+        default: 'A modern hapijs backend',
+        store: true
       },
       {
         type: `input`,
         name: 'service.port',
         message: `Default port of the server`,
-        default: 3000
+        default: 3000,
+        store: true
       },
       // Author
       {
         type: `input`,
         name: 'author.fullName',
         message: `Author (also used in license)`,
-        default: author.trim()
+        default: author.trim(),
+        store: true
       },
       {
         type: `input`,
         name: 'author.name',
         message: `Author short name`,
-        default: this._hyphenate(author.trim())
+        default: this._hyphenate(author.trim()),
+        store: true
       },
       {
         type: `input`,
         name: `author.email`,
         message: `Author Email`,
-        default: email.trim()
+        default: email.trim(),
+        store: true
       },
       {
         type: `input`,
         name: `author.github`,
-        message: `Github Username`
+        message: `Github Username`,
+        store: true
       },
       // Docker
       {
         type: `confirm`,
         name: `useDocker`,
         default: true,
-        message: `Do want to use docker ?`
+        message: `Do want to use docker ?`,
+        store: true
       }
     ];
 
