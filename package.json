@@ -9,7 +9,7 @@
     "email": "rdanielo@gmail.com",
     "url": "https://danielorodriguez.com"
   },
-  "files": ["generators"],
+  "files": ["generators", "utils"],
   "main": "generators/index.js",
   "keywords": ["hapi", "swagger", "docker", "ES6", "yeoman-generator"],
   "devDependencies": {
