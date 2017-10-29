@@ -15,22 +15,19 @@ module.exports = class extends BaseGenerator {
         type: `input`,
         name: 'service.name',
         message: `Server Name`,
-        default: this._hyphenate(this.appname),
-        store: true
+        default: this._hyphenate(this.appname)
       },
       {
         type: `input`,
         name: 'service.description',
         message: `Description (what does this server do)`,
-        default: 'A modern hapijs backend',
-        store: true
+        default: 'A modern hapijs backend'
       },
       {
         type: `input`,
         name: 'service.port',
         message: `Default port of the server`,
-        default: 3000,
-        store: true
+        default: 3000
       },
       // Author
       {
@@ -65,8 +62,7 @@ module.exports = class extends BaseGenerator {
         type: `confirm`,
         name: `useDocker`,
         default: true,
-        message: `Do want to use docker ?`,
-        store: true
+        message: `Do want to use docker ?`
       }
     ];
 
