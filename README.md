@@ -15,7 +15,7 @@ npm install -g generator-hapi-swagger-es6
 Then generate your new project:
 
 ```bash
-yo hapi-swagger-es-6
+yo hapi-swagger-es6
 ```
 
 ## Generator Features
