@@ -1,3 +1,4 @@
+'use strict';
 const BaseGenerator = require('../../utils/BaseGenerator');
 const chalk = require('chalk');
 const yosay = require('yosay');
