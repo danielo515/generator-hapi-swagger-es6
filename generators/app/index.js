@@ -1,4 +1,3 @@
-'use strict';
 const BaseGenerator = require('../../utils/BaseGenerator');
 const chalk = require('chalk');
 const yosay = require('yosay');
@@ -64,6 +63,13 @@ module.exports = class extends BaseGenerator {
         name: `useDocker`,
         default: true,
         message: `Do want to use docker ?`
+      },
+      // Authentication
+      {
+        type: `confirm`,
+        name: `authentication`,
+        default: false,
+        message: `Do want to use JWT authentication ?`
       }
     ];
 
