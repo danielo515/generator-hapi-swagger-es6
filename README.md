@@ -1,4 +1,6 @@
 # generator-hapi-swagger-es6 
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/danielo515/generator-hapi-swagger-es6.svg)](https://greenkeeper.io/)
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 [![npm](https://img.shields.io/npm/dt/generator-hapi-swagger-es6.svg?style=flat-square)](https://www.npmjs.com/package/generator-hapi-swagger-es6)
 > A modern hapi REST service with automatic documentation using swagger with optional docker support
