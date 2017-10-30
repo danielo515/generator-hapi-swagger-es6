@@ -35,24 +35,28 @@ module.exports = class extends BaseGenerator {
         type: `input`,
         name: 'author.fullName',
         message: `Author (also used in license)`,
-        default: author.trim()
+        default: author.trim(),
+        store: true
       },
       {
         type: `input`,
         name: 'author.name',
         message: `Author short name`,
-        default: this._hyphenate(author.trim())
+        default: this._hyphenate(author.trim()),
+        store: true
       },
       {
         type: `input`,
         name: `author.email`,
         message: `Author Email`,
-        default: email.trim()
+        default: email.trim(),
+        store: true
       },
       {
         type: `input`,
         name: `author.github`,
-        message: `Github Username`
+        message: `Github Username`,
+        store: true
       },
       // Docker
       {
