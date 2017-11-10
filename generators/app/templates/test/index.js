@@ -1,21 +1,21 @@
 // Load modules
 
-var Hapi = require('hapi');
+const Hapi = require('hapi');
 
-var Lab = require('lab');
-var Server = require('../lib');
-var Version = require('../lib/version');
-var Path = require('path');
+const Lab = require('lab');
+const Server = require('../lib');
+const Version = require('../lib/api/version');
+const Path = require('path');
 
 //declare internals
 
-var internals = {};
+const internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
+const lab = exports.lab = Lab.script();
 const expect = lab.expect;
-var it = lab.test;
+const it = lab.test;
 
 
 it('starts server and returns hapi server object', function (done) {
@@ -42,7 +42,7 @@ it('starts server on provided port', function (done) {
 
 it('handles register plugin errors', { parallel: false }, function (done) {
 
-  var orig = Version.register;
+  const orig = Version.register;
   Version.register = function (server, options, next) {
 
     Version.register = orig;
