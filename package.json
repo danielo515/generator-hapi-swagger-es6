@@ -9,6 +9,12 @@
     "email": "rdanielo@gmail.com",
     "url": "https://danielorodriguez.com"
   },
+  "contributors": [
+    {
+      "name": "Ignacio Justicia Ramos",
+      "email": "ignaciojusticia@gmail.com"
+    }
+  ],
   "files": ["generators", "utils"],
   "main": "generators/index.js",
   "keywords": ["hapi", "swagger", "docker", "ES6", "yeoman-generator"],
