@@ -4,7 +4,8 @@
 const Config = require('getconfig');
 const Hoek = require('hoek');
 const Server = require('./index');
-const DAO = require('./../dao');
+const DAO = require('./../dao/index');
+const Mongo = require('mongodb').MongoClient;
 
 // Declare internals
 
@@ -65,9 +66,9 @@ internals.manifest = {
         {
             plugin: './api/healthcheck'
         },
-        <% if(useAuthentication){ %>{
-            plugin: './api/users/register.POST'
-        },
+        <% if(useAuthentication) { %>{
+        plugin: './api/users/register.POST'
+    },
         {
             plugin: './api/users/login.POST'
         },
@@ -84,7 +85,6 @@ internals.composeOptions = {
 Server.init(internals.manifest, internals.composeOptions, (err, server) => {
 
     Hoek.assert(!err, err);
-    const Mongo = require('mongodb').MongoClient;
     const URL = 'mongodb://localhost:27017';
 
     Mongo.connect(URL)
@@ -93,5 +93,11 @@ Server.init(internals.manifest, internals.composeOptions, (err, server) => {
             const _DAO = DAO(db);
             server.decorate('request', 'DAO', _DAO);
             server.log(process.env.npm_package_name + ' v' + process.env.npm_package_version + ' started at: ' + server.info.uri);
+        })
+        .catch((error) => {
+
+            if (error) {
+                throw (error);
+            }
         });
 });
