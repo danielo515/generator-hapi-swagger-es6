@@ -1,8 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
-const Config = require('getconfig');
-const JWT = require('hapi-auth-jwt2');
+const HapiJWT = require('hapi-auth-jwt2');
+const AuthKey = require('getConfig').server.authKey;
 
 const validation = (decoded, callback) => {
 
@@ -14,29 +13,22 @@ const validation = (decoded, callback) => {
     }
 };
 
+const register = function register(server, options, next) {
 
-exports.register = (server, options, next) => {
+    server.register(HapiJWT);
+    server.auth.strategy('jwt', 'jwt', false,
+        {
+            key: AuthKey,
+            validateFunc: validation,
+            verifyOptions: { algorithms: ['HS256'] }
+        });
 
-    server.register(JWT, (error) => {
-
-        if (error) {
-            throw (error);
-        }
-        else {
-
-            server.auth.strategy('jwt', 'jwt', false, {
-                key: Config.authKey,
-                verifyOptions: {
-                    algorithms: ['HS256']
-                },
-                validateFunc: validation
-            });
-        }
-    });
-
+    server.auth.default('jwt');
     return next();
 };
 
-exports.register.attributes = {
-    name: 'authentication'
+register.attributes = {
+    name: 'auth-wrapper'
 };
+
+module.exports = register;

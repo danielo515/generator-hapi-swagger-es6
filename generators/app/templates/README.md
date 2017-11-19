@@ -15,6 +15,7 @@
 ## Get things running
 
 * Start the server `npm start`
+* Documentation site available in `/documentation` site
 * Start the server on dev mode `npm run start-dev` 
 * Run tests `npm test`
 * With the server running, open `http://localhost:<%- service.port %>/version` to see the version of your package
