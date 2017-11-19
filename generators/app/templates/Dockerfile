@@ -4,7 +4,7 @@
 
 FROM node:8
 
-LABEL maintainers.<%- author.name %>="<%- author.fullName %> <<%- author.email %>>"
+LABEL maintainers.<%- author.name %>="<%-author.fullName %> <<%-author.email %>>"
 
 ENV USER dockerfileUser
 

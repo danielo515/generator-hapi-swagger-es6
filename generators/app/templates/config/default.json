@@ -1,8 +1,7 @@
 {
   "server": {
     "port": <%- service.port %>,
-    <% if(useAuthentication){ -%>
-    "authKey": "H5SA7hdVmtwT0lpemh2KN7GGln1oOU99_change_for_your_jwt_authkey"
-    <% } %>
+    <% if(useAuthentication){ -%>"authKey": "H5SA7hdVmtwT0lpemh2KN7GGln1oOU99_change_to_your_secret_jwt_authkey"
+    <%} %>
   }
 }
