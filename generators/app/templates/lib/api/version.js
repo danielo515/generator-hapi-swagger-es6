@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 const internals = {
     response: {
@@ -14,7 +15,8 @@ exports.register = (server, options, next) => {
         path: '/ops/version',
         config: {
             description: 'Returns the version of the server',
-            notes: 'Based on the package version',
+            <% if(useAuthentication) { %>auth: false,
+            <% } %>notes: 'Based on the package version',
             tags: ['meta', 'ops', 'api'],
             response: {
                 status: {
