@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const Boom = require('boom');
 const JWT = require('jsonwebtoken');
-const Config = require('getconfig');
+const authKey = require('getConfig').server.authKey; // Remember to change the value of the authKey to your JWT authentication key
 const TOKEN_TTL = '1d'; // The token will expires in 1 day
 
 
@@ -13,7 +13,9 @@ exports.register = (server, options, next) => {
         method: 'POST',
         path: '/users/login',
         config: {
-            description: 'Login',
+            description: 'User sign-in',
+            auth: false,
+            tags: ['meta', 'users', 'api'],
             notes: 'Login a user and generates a new authentication token which expires in 1 day',
             validate: {
                 payload: {
@@ -36,7 +38,7 @@ exports.register = (server, options, next) => {
                             };
 
                             // Generate a token for this user session (30 minutes expiration)
-                            const token = JWT.sign(session, Config.authKey, { expiresIn: TOKEN_TTL });
+                            const token = JWT.sign(session, authKey, { expiresIn: TOKEN_TTL });
 
                             const res = {
                                 token,

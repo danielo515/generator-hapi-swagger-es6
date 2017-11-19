@@ -11,6 +11,8 @@ exports.register = (server, options, next) => {
         path: '/users/register',
         config: {
             description: 'Sign up - Creates a new user',
+            auth: false,
+            tags: ['meta', 'users', 'api'],
             validate: {
                 payload: {
                     username: Joi.string().min(6).max(20).required().description('The username is the users identifier'),
