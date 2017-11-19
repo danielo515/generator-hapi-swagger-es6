@@ -67,8 +67,8 @@ internals.manifest = {
             plugin: './api/healthcheck'
         },
         <% if(useAuthentication) { %>{
-        plugin: './api/users/register.POST'
-    },
+            plugin: './api/users/register.POST'
+        },
         {
             plugin: './api/users/login.POST'
         },
