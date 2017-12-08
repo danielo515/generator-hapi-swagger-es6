@@ -64,7 +64,7 @@ module.exports = class extends BaseGenerator {
         default: true,
         message: `Do want to use docker ?`
       },
-      // Authentication
+      // JWT Authentication
       {
         type: `confirm`,
         name: `useAuthentication`,
@@ -125,6 +125,7 @@ module.exports = class extends BaseGenerator {
     this._copyFile({ from: '__package.json', to: 'package.json' });
   }
 
+  // Launch npm install
   install() {
     this.installDependencies();
   }

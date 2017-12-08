@@ -3,8 +3,15 @@
 const HapiJWT = require('hapi-auth-jwt2');
 const AuthKey = require('getConfig').server.authKey;
 
-const validation = (decoded, callback) => {
+/**
+ * This is the JSON Web Token validation function that is useful for decoding.
+ *
+ * @param {String} decoded
+ * @param {Function} callback
+ */
+const validation = (decoded, request, callback) => {
 
+    // If the decoding worked fine then the property username must exist.
     if (!decoded.user.username) {
         callback(null, false); // JWT Validation failed
     }
@@ -13,17 +20,16 @@ const validation = (decoded, callback) => {
     }
 };
 
-const register = function register(server, options, next) {
+const register = (server, options, next) => {
 
     server.register(HapiJWT);
-    server.auth.strategy('jwt', 'jwt', false,
+    server.auth.strategy('jwt', 'jwt', true,
         {
             key: AuthKey,
             validateFunc: validation,
             verifyOptions: { algorithms: ['HS256'] }
         });
 
-    server.auth.default('jwt');
     return next();
 };
 

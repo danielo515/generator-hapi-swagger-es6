@@ -5,7 +5,6 @@ const Glue = require('glue');
 
 
 // Declare internals
-
 const internals = {};
 
 
