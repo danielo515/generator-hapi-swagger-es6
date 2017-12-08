@@ -7,6 +7,7 @@ const AuthKey = require('getConfig').server.authKey;
  * This is the JSON Web Token validation function that is useful for decoding.
  *
  * @param {String} decoded
+ * @param {Object} request
  * @param {Function} callback
  */
 const validation = (decoded, request, callback) => {
