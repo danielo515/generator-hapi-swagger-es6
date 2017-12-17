@@ -16,21 +16,25 @@ exports.register = (server, options, next) => {
             validate: {
                 payload: {
                     username: Joi.string().min(6).max(20).required().description('The username is the users identifier'),
-                    password: Joi.string().alphanum().min(6).max(20).required(),
+                    password: Joi.string().alphanum().min(6).max(20).required()
                 }
             },
             response: {
                 status: {
-                    200: Joi.object(),
+                    200: Joi.object().keys({
+                        userCreated: Joi.object().keys({
+                            username: Joi.string()
+                        })
+                    }),
                     400: Joi.object().keys({
                         statusCode: 400,
-                        message: Joi.string().example('User could not be created because the format was wrong'),
-                        error: Joi.string().example('Bad Request')
+                        error: Joi.string().example('Bad Request'),
+                        message: Joi.string().example('User could not be created because the format was wrong')
                     }),
                     500: Joi.object().keys({
                         statusCode: 500,
-                        message: Joi.string().example('An internal server error occurred'),
-                        error: Joi.string().example('Internal Server Error')
+                        error: Joi.string().example('Internal Server Error'),
+                        message: Joi.string().example('An internal server error occurred')
                     })
                 }
             },
@@ -39,7 +43,11 @@ exports.register = (server, options, next) => {
                 request.DAO.users.insert(request.payload)
                     .then((result) => {
 
-                        return reply({ userCreated: result.inserted });
+                        return reply({
+                            userCreated: {
+                                username: result.username
+                            }
+                        });
                     })
                     .catch((error) => {
 

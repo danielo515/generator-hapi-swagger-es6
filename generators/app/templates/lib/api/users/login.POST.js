@@ -22,6 +22,25 @@ exports.register = (server, options, next) => {
                     password: Joi.string().alphanum().min(6).max(20).required()
                 }
             },
+            response: {
+                status: {
+                    200: Joi.object().keys({
+                        user: Joi.object().keys({
+                            username: Joi.string()
+                        })
+                    }),
+                    401: Joi.object().keys({
+                        statusCode: 401,
+                        error: Joi.string().example('Unauthorized'),
+                        message: Joi.string().example('Login failed. User or password incorrect')
+                    }),
+                    500: Joi.object().keys({
+                        statusCode: 500,
+                        error: Joi.string().example('Internal Server Error'),
+                        message: Joi.string().example('An internal server error occurred')
+                    })
+                }
+            },
             handler(request, reply) {
 
                 request.DAO.users.login(request.payload.username, request.payload.password)
@@ -39,8 +58,12 @@ exports.register = (server, options, next) => {
                             // Generate a token for this user session and store the data in this session
                             const token = JWT.sign(session, Config.server.authKey);
 
-                            return reply(user)
-                                .header('Authorization', token)                     // where token is the JWT
+                            return reply({
+                                user: {
+                                    username: user.username
+                                }
+                            })
+                                .header('Authorization', token)  // where token is the JWT
                                 .state('token', token, Config.server.jwtOptions);
                         }
 
