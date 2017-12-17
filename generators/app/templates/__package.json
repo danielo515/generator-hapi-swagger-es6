@@ -39,6 +39,7 @@
     <% if(useAuthentication){ -%>
       "hapi-auth-jwt2": "^7.3.0",
       "jsonwebtoken": "^7.1.9",
+      "bcrypt": "^1.0.3",
     <% } -%>
     "hapi-swagger": "^7.8.1",
     "hoek": "5.0.0",

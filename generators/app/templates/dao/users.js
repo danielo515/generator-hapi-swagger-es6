@@ -1,9 +1,17 @@
 'use strict';
 
+var bcrypt = require('bcrypt'); // To hash passwords
+const saltRounds = 10;
+
 /**
  * This module accepts a database connection and exports a set of methods to interact with this database.
  *
  * @param {Object} db is a mongo database object.
+ * @exports {Object} that is a factory containing the following data access' functions as properties:
+ *          - findByUsername
+ *          - updateByUsername
+ *          - insert
+ *          - login
  */
 module.exports = (db) => {
 
@@ -29,29 +37,50 @@ module.exports = (db) => {
      */
     const login = (username, password) => {
 
-        return users.findOne({ username, password })
+        return users.findOne({ username })
             .then((user) => {
 
+                // Check if the user exists
                 if (user) {
-                    return user;
+
+                    // Comparison between hashed password stored in the database and the password that the user has sended to the backend.
+                    return bcrypt.compare(password, user.password).then((result) => {
+
+                        if (result) {       // The passwords matched
+                            return user;    // Login success
+                        }
+                    });
                 }
-                return false;
+                // If the user does not exist or the passwords did not match then we return false
+                return false; // Login failed
             });
     };
 
     /**
      * This function inserts a new object for a user in the database.
+     * The password field is hashed using bcrypt library and 10 rounds.
      *
      * @param {Object} newUser that has the information of a user.
      * @returns {Promise} that will consist in two keys: the inserted user and the response of the database.
      */
     const insert = (newUser) => {
 
-        return users.insertOne(newUser)
-            .then((res) => {
+        return bcrypt.hash(newUser.password, saltRounds).then((hash) => {
 
-                return { inserted: newUser, result: res.result };
-            });
+            // Store hashed password in DB
+            const userToStore = newUser;
+            delete userToStore.password;
+            userToStore.password = hash;
+
+            return users.insertOne(userToStore)
+                .then((res) => {
+
+                    if (res.insertedCount === 1) {
+                        return newUser;
+                    }
+                    return 0;
+                })
+        });
     };
 
     /**
