@@ -24,6 +24,7 @@ const validation = (decoded, request, callback) => {
 const register = (server, options, next) => {
 
     server.register(HapiJWT);
+
     server.auth.strategy('jwt', 'jwt', true,
         {
             key: AuthKey,
