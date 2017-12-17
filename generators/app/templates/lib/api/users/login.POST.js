@@ -3,8 +3,7 @@
 const Joi = require('joi');
 const Boom = require('boom');
 const JWT = require('jsonwebtoken');
-const authKey = require('getConfig').server.authKey; // Remember to change the value of the authKey to your JWT authentication key
-const TOKEN_TTL = '1d'; // The token will expires in 1 day
+const Config = require('getconfig'); // Remember to change the value of the authKey to your JWT authentication key
 
 
 exports.register = (server, options, next) => {
@@ -37,15 +36,12 @@ exports.register = (server, options, next) => {
                                 user
                             };
 
-                            // Generate a token for this user session (30 minutes expiration)
-                            const token = JWT.sign(session, authKey, { expiresIn: TOKEN_TTL });
+                            // Generate a token for this user session and store the data in this session
+                            const token = JWT.sign(session, Config.server.authKey);
 
-                            const res = {
-                                token,
-                                user
-                            };
-
-                            return reply(res).header('Authorization', token);
+                            return reply(user)
+                                .header('Authorization', token)                     // where token is the JWT
+                                .state('token', token, Config.server.jwtOptions);
                         }
 
                         // Authentication failed
