@@ -27,6 +27,24 @@
 * POST **`/users/login`**: Login a user and generates a new authentication token which expires in 1 day.
 * POST **`/users/register`**: Sign up - Creates a new user.
 * GET **`/users/me`**: Get the current user information details - [ *Authentication required* ]'
+
+## Authentication flow with JWT
+These are the steps to get a the user information with the `/users/me`, which is the only endpoint that requires authentication:
+
+1. To choose your username and password for the signing-up. To do so, use the `/users/register` endpoint.
+2. To sign-in with your credentials using the endpoint `/users/login`. If the loggin is successful then you will be able to continue the next steps.
+3. To take the **authorization** header received in the server's login response.
+4. To use this authorization header in the GET request of `/users/me`. Finally you will get a response like this:
+
+```
+{
+  "user": {
+    "email": "your-email@example.com"
+  },
+  "iat": timestamp
+}
+```
+
  <% } -%>
 
 
