@@ -39,7 +39,7 @@ These are the steps to get a the user information with the `/users/me`, which is
 ```
 {
   "user": {
-    "email": "your-email@example.com"
+    "username": "your-username"
   },
   "iat": timestamp
 }
