@@ -15,7 +15,7 @@
 ## Get things running
 
 * Start the server `npm start`
-* Documentation site available in `/documentation` site
+* Documentation available at `/documentation`
 * Start the server on dev mode `npm run start-dev` 
 * Run tests `npm test`
 * With the server running, open `http://localhost:<%- service.port %>/documentation` to see the documentation of your API
@@ -25,16 +25,16 @@
 * GET **`/ops/version`**: returns the package.json version.
 <% if(useAuthentication){ -%>
 * POST **`/users/login`**: Login a user and generates a new authentication token which expires in 1 day.
-* POST **`/users/register`**: Sign up - Creates a new user.
+* POST **`/users/register`**: Register - Creates a new user.
 * GET **`/users/me`**: Get the current user information details - [ *Authentication required* ]'
 
 ## Authentication flow with JWT
 These are the steps to get a the user information with the `/users/me`, which is the only endpoint that requires authentication:
 
-1. To choose your username and password for the signing-up. To do so, use the `/users/register` endpoint.
-2. To sign-in with your credentials using the endpoint `/users/login`. If the loggin is successful then you will be able to continue the next steps.
+1. To choose your username and password for the signing-up. To do so, use the `/users/register` endpoint and add your username and password in the body of the request.
+2. Use the endpoint `/users/login` with your credentials to register. If the loggin is successful you will be able to continue the next steps.
 3. To take the **authorization** header received in the server's login response.
-4. To use this authorization header in the GET request of `/users/me`. Finally you will get a response like this:
+4. Use this authorization header in a GET request to `/users/me`. Finally you will get a response like this:
 
 ```
 {

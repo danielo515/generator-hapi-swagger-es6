@@ -43,7 +43,7 @@ After running the command `yo` and he selecting the **Hapi Swagger Es6**, the us
 * GET **`/ops/healthcheck`**: just returns a message saying 'ok'.
 * GET **`/ops/version`**: returns the package.json version.
 * POST **`/users/login`** [JWT Authentication only]: Login a user and generates a new authentication token which expires in 1 day.
-* POST **`/users/register`** [JWT Authentication only]: Sign up - Creates a new user.
+* POST **`/users/register`** [JWT Authentication only]: Register - Creates a new user.
 * GET **`/users/me`** [JWT Authentication only]: Get the current user information details - [ *Authentication required* ]'
 
 ## Getting To Know Yeoman
