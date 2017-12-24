@@ -35,24 +35,20 @@ module.exports = (db) => {
      * @param {String} password
      * @returns {Promise} that will be true if the credentials are correct otherwise false.
      */
-    const login = (username, password) => {
+    const checkCredentials = (username, password) => {
 
         return users.findOne({ username })
             .then((user) => {
 
-                // Check if the user exists
-                if (user) {
+                if (!user) { return false }
+                // Comparison between hashed password stored in the database and the password that the user has sended to the backend.
+                return bcrypt.compare(password, user.password).then((result) => {
 
-                    // Comparison between hashed password stored in the database and the password that the user has sended to the backend.
-                    return bcrypt.compare(password, user.password).then((result) => {
-
-                        if (result) {       // The passwords matched
-                            return user;    // Login success
-                        }
-                    });
-                }
-                // If the user does not exist or the passwords did not match then we return false
-                return false; // Login failed
+                    if (result) {       // The passwords matched
+                        return user;    // Login success
+                    }
+                    return false; // Login failed: if the user does not exist or the passwords did not match then we return false
+                });
             });
     };
 
@@ -68,18 +64,17 @@ module.exports = (db) => {
         return bcrypt.hash(newUser.password, saltRounds).then((hash) => {
 
             // Store hashed password in DB
-            const userToStore = newUser;
-            delete userToStore.password;
-            userToStore.password = hash;
+            const userToStore = Object.assign({}, newUser, { password: hash });
 
             return users.insertOne(userToStore)
                 .then((res) => {
 
                     if (res.insertedCount === 1) {
-                        return newUser;
+                        res.userCreated = userToStore;
+                        return res;
                     }
-                    return 0;
-                })
+                    return res;
+                });
         });
     };
 
@@ -99,6 +94,6 @@ module.exports = (db) => {
         findByUsername,
         updateByUsername,
         insert,
-        login
+        checkCredentials
     };
 };
