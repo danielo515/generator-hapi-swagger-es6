@@ -18,7 +18,7 @@ exports.register = (server, options, next) => {
             notes: 'Login a user and generates a new authentication token which expires in 1 day',
             validate: {
                 payload: {
-                    username: Joi.string().min(6).max(20).required().description('The username is the users identifier'),
+                    username: Joi.string().min(6).max(20).required().description('The username is the user\'s identifier'),
                     password: Joi.string().alphanum().min(6).max(20).required()
                 }
             },
@@ -43,7 +43,7 @@ exports.register = (server, options, next) => {
             },
             handler(request, reply) {
 
-                request.DAO.users.login(request.payload.username, request.payload.password)
+                request.DAO.users.checkCredentials(request.payload.username, request.payload.password)
                     .then((user) => {
 
                         if (user) { // The user was successfully authenticated

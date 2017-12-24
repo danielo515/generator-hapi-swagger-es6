@@ -10,7 +10,7 @@ exports.register = (server, options, next) => {
         method: 'POST',
         path: '/users/register',
         config: {
-            description: 'Sign up - Creates a new user',
+            description: 'Register - Creates a new user',
             auth: false,
             tags: ['meta', 'users', 'api'],
             validate: {
@@ -43,9 +43,12 @@ exports.register = (server, options, next) => {
                 request.DAO.users.insert(request.payload)
                     .then((result) => {
 
+                        if (result.insertedCount === 0) {
+                            return reply(Boom.badRequest('User could not be created'));
+                        }
                         return reply({
                             userCreated: {
-                                username: result.username
+                                username: result.userCreated.username
                             }
                         });
                     })

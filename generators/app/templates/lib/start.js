@@ -15,7 +15,7 @@ const internals = {};
 internals.manifest = {
     connections: [
         {
-            port: process.env.PORT || Config.server.port
+            port: process.env.PORT || Config.server.port || <%- service.port %>
         }
     ],
     registrations: [
@@ -97,8 +97,7 @@ Server.init(internals.manifest, internals.composeOptions, (err, server) => {
         Mongo.connect(URL)
             .then((db) => {
 
-                const _DAO = DAO(db);
-                server.decorate('request', 'DAO', _DAO);
+                server.decorate('request', 'DAO', DAO(db));
                 server.log(process.env.npm_package_name + ' v' + process.env.npm_package_version + ' started at: ' + server.info.uri);
             })
             .catch((error) => {
