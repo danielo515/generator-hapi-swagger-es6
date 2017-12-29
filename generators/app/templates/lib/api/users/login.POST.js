@@ -72,9 +72,6 @@ exports.register = (server, options, next) => {
                     })
                     .catch((error) => {
 
-                        if (error.isJoi) {
-                            return reply(Boom.badRequest(error));
-                        }
                         return reply(Boom.badImplementation('Internal server error: ', error));
                     });
             }
