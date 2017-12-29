@@ -1,21 +1,19 @@
+'use strict';
+
 // Load modules
-
-
-var Lab = require('lab');
-var Server = require('../lib');
-var Path = require('path');
+const Lab = require('lab');
+const Server = require('../lib');
+const Path = require('path');
 
 // Declare internals
-
-var internals = {};
+const internals = {};
 
 
 // Test shortcuts
-
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
 const expect = lab.expect;
-var it = lab.test;
+const it = lab.test;
 
 
 describe('/ops/healthcheck', function () {

@@ -5,13 +5,18 @@ exports.register = function (server, options, next) {
     server.route({
         path: '/ops/healthcheck',
         method: 'GET',
+        <% if(useAuthentication) { -%>
+            config: {
+                auth: false
+            },
+        <% } -%>
         handler(request, reply) {
 
-            reply({ message: 'ok' });
+            return reply({ message: 'ok' });
         }
     });
 
-    next();
+    return next();
 };
 
 exports.register.attributes = {

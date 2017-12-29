@@ -1,4 +1,3 @@
-'use strict';
 const BaseGenerator = require('../../utils/BaseGenerator');
 const chalk = require('chalk');
 const yosay = require('yosay');
@@ -16,7 +15,7 @@ module.exports = class extends BaseGenerator {
         type: `input`,
         name: 'service.name',
         message: `Server Name`,
-        default: this._hyphenate(this.appname)
+        default: this._hyphenate(this.appname.toLowerCase())
       },
       {
         type: `input`,
@@ -64,6 +63,13 @@ module.exports = class extends BaseGenerator {
         name: `useDocker`,
         default: true,
         message: `Do want to use docker ?`
+      },
+      // JWT Authentication
+      {
+        type: `confirm`,
+        name: `useAuthentication`,
+        default: true,
+        message: `Do want to use JWT authentication ?`
       }
     ];
 
@@ -85,26 +91,42 @@ module.exports = class extends BaseGenerator {
 
   writing() {
     console.log(this.prompt === require('inquirer').prompt);
+
     // Folders
-    this._copyFile('lib');
+    this._copyFile('lib/api/healthCheck.js');
+    this._copyFile('lib/api/version.js');
+    this._copyFile('lib/index.js');
+    this._copyFile('lib/start.js');
     this._copyFile('test');
     this._copyFile('config');
+
     // Root files
     this._copyFile('.gitignore');
     this._copyFile('.eslintignore');
     this._copyFile('.eslintrc');
+
     // Docker
     if (this.props.useDocker) {
       this._copyFile('docker-compose.yml');
       this._copyFile('Dockerfile');
     }
 
+    // JWT Authentication
+    if (this.props.useAuthentication) {
+      this._copyFile('authentication');
+      this._copyFile('Dockerfile');
+      this._copyFile('lib/api/users');
+      this._copyFile('dao');
+    }
+
     this._copyFile('README.md');
+
     // Special files
     this._copyFile({ from: '__package.json', to: 'package.json' });
   }
 
+  // Launch npm install
   install() {
-    /* This.installDependencies(); */
+    this.installDependencies();
   }
 };

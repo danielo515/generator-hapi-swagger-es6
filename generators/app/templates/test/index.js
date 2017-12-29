@@ -1,18 +1,16 @@
+'use strict';
+
 // Load modules
-
 const Hapi = require('hapi');
-
 const Lab = require('lab');
 const Server = require('../lib');
 const Version = require('../lib/api/version');
 const Path = require('path');
 
 //declare internals
-
 const internals = {};
 
 // Test shortcuts
-
 const lab = exports.lab = Lab.script();
 const expect = lab.expect;
 const it = lab.test;
